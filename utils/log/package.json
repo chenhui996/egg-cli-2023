@@ -1,0 +1,32 @@
+{
+  "name": "@egg-cli-2023/log",
+  "version": "1.0.4",
+  "description": "egg cli 2023 log",
+  "author": "chenhui996 <chen562450669@qq.com>",
+  "homepage": "https://github.com/chenhui996/egg-cli-2023#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenhui996/egg-cli-2023.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/chenhui996/egg-cli-2023/issues"
+  },
+  "dependencies": {
+    "npmlog": "^7.0.1"
+  }
+}
