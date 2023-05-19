@@ -27,6 +27,7 @@
     "@egg-cli-2023/log": "file:../../utils/log",
     "@egg-cli-2023/utils": "file:../../utils/utils",
     "colors": "^1.4.0",
+    "dotenv": "^16.0.3",
     "import-local": "^3.1.0",
     "minimist": "^1.2.8",
     "npmlog": "^7.0.1",
