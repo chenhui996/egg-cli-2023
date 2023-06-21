@@ -1,0 +1,34 @@
+{
+  "name": "get-npm-info",
+  "version": "1.0.4",
+  "description": "get npm info",
+  "author": "hui.chen <hui.chen@sumscope.com>",
+  "homepage": "https://github.com/chenhui996/egg-cli-2023#readme",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "http://npmjs.sumscope.com/repository/npm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenhui996/egg-cli-2023.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/chenhui996/egg-cli-2023/issues"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "semver": "^7.5.2",
+    "url-join": "4.0.1"
+  }
+}

@@ -1,0 +1,12 @@
+0 silly argv {
+0 silly argv   _: [ 'add' ],
+0 silly argv   globs: [ 'utils/get-npm-info' ],
+0 silly argv   lernaVersion: '3.22.1',
+0 silly argv   '$0': 'lerna',
+0 silly argv   pkg: 'url-join@0.1.1'
+0 silly argv }
+1 notice cli v3.22.1
+2 verbose rootPath /Users/chenhui/Downloads/rollup-l/2023/egg-cli-2023
+3 error url-join: No matching version found for url-join@0.1.1.
+3 error     at pickManifest (/Users/chenhui/Downloads/rollup-l/2023/egg-cli-2023/node_modules/npm-pick-manifest/index.js:122:13)
+3 error     at /Users/chenhui/Downloads/rollup-l/2023/egg-cli-2023/node_modules/@evocateur/pacote/lib/fetchers/registry/manifest.js:43:18
