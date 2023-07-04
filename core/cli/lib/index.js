@@ -7,25 +7,61 @@ const semver = require('semver');
 const colors = require('colors/safe');
 const userHome = require('user-home');
 const pathExists = require('path-exists').sync;
+const commander = require('commander')
 const log = require('@egg-cli-2023/log');
 
 const constant = require('./const')
 const pkg = require('../package.json');
 
+const program = new commander.Command();
+
 async function core() {
-    console.log('exec core');
+    // console.log('exec core');
     try {
         checkPkgVersion();
         checkNodeVersion();
         checkRoot();
         checkUserHome();
-        checkInputArgs();
+        // checkInputArgs();
         log.verbose('debug', 'test debug log');
         checkEnv();
         await checkGlobalUpdate();
+        registerCommand(); // cli entry
     } catch (error) {
         log.error(error.message);
     }
+}
+
+// 命令注册 cli entry
+function registerCommand() {
+    // 1
+    program
+        .name(Object.keys(pkg.bin)[0])
+        .usage('<command> [options]')
+        .version(pkg.version)
+        .option('-d, --debug', '是否开启调试模式', false);
+
+    // 实现/监听 debug 模式
+    program.on('option:debug', function () {
+        if (program.debug) {
+            process.env.LOG_LEVEL = 'verbose';
+        } else {
+            process.env.LOG_LEVEL = 'info';
+        }
+        log.level = process.env.LOG_LEVEL;
+        log.verbose('test');
+    })
+
+    // 实现/监听 未知命令
+    program.on('command:*', function (obj) {
+        const availableCommands = program.commands.map(cmd => cmd.name());
+        console.log(colors.red('未知的命令：' + obj[0]));
+        if (availableCommands.length > 0) {
+            console.log(colors.red('可用命令：' + availableCommands.join(',')));
+        }
+    })
+
+    program.parse(process.argv);
 }
 
 // 检查是否需要全局更新
@@ -97,7 +133,7 @@ function checkUserHome() {
 function checkRoot() {
     const rootCheck = require('root-check');
     rootCheck();
-    console.log(process.geteuid());
+    // console.log(process.geteuid());
 }
 
 // node 最低版本号检查
