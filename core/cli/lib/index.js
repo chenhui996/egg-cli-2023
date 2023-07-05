@@ -62,6 +62,13 @@ function registerCommand() {
     })
 
     program.parse(process.argv);
+
+    if (program.args && program.args.length < 1) {
+        // process.argv[0] === node
+        // process.argv[1] === egg-cli-2023
+        program.outputHelp();
+        console.log();
+    }
 }
 
 // 检查是否需要全局更新
