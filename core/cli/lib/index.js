@@ -9,6 +9,7 @@ const userHome = require('user-home');
 const pathExists = require('path-exists').sync;
 const commander = require('commander')
 const log = require('@egg-cli-2023/log');
+const init = require('@egg-cli-2023/init');
 
 const constant = require('./const')
 const pkg = require('../package.json');
@@ -40,6 +41,12 @@ function registerCommand() {
         .usage('<command> [options]')
         .version(pkg.version)
         .option('-d, --debug', '是否开启调试模式', false);
+
+    // 命令注册
+    program
+        .command('init [projectName]')
+        .option('-f, --force', '是否强制初始化项目')
+        .action(init);
 
     // 实现/监听 debug 模式
     program.on('option:debug', function () {

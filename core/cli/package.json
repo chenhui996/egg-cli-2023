@@ -27,6 +27,7 @@
     "@egg-cli-2023/get-npm-info": "file:../../utils/get-npm-info",
     "@egg-cli-2023/log": "file:../../utils/log",
     "@egg-cli-2023/utils": "file:../../utils/utils",
+    "@egg-cli-2023/init": "file:../../commands/init",
     "colors": "^1.4.0",
     "commander": "^6.2.1",
     "dotenv": "^16.0.3",
