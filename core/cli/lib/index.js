@@ -19,14 +19,7 @@ const program = new commander.Command();
 async function core() {
     // console.log('exec core');
     try {
-        checkPkgVersion();
-        checkNodeVersion();
-        checkRoot();
-        checkUserHome();
-        // checkInputArgs();
-        log.verbose('debug', 'test debug log');
-        checkEnv();
-        await checkGlobalUpdate();
+        await prepare(); // 环境准备
         registerCommand(); // cli entry
     } catch (error) {
         log.error(error.message);
@@ -40,7 +33,8 @@ function registerCommand() {
         .name(Object.keys(pkg.bin)[0])
         .usage('<command> [options]')
         .version(pkg.version)
-        .option('-d, --debug', '是否开启调试模式', false);
+        .option('-d, --debug', '是否开启调试模式', false)
+        .option('-tp, --targetPath <targetPath>', '是否指定本地调试文件路径', '');
 
     // 命令注册
     program
@@ -57,6 +51,12 @@ function registerCommand() {
         }
         log.level = process.env.LOG_LEVEL;
         log.verbose('test');
+    })
+
+    // 指定 targetPath
+    program.on('option:targetPath', function () {
+        // console.log('option:targetPath', program.targetPath);
+        process.env.CLI_TARGET_PATH = program.targetPath;
     })
 
     // 实现/监听 未知命令
@@ -76,6 +76,16 @@ function registerCommand() {
         program.outputHelp();
         console.log();
     }
+}
+
+// 环境准备
+async function prepare() {
+    checkPkgVersion();
+    checkNodeVersion();
+    checkRoot();
+    checkUserHome();
+    checkEnv();
+    await checkGlobalUpdate();
 }
 
 // 检查是否需要全局更新
@@ -103,7 +113,6 @@ function checkEnv() {
         });
     }
     createDefaultConfig();
-    log.verbose('环境变量', process.env.CLI_HOME_PATH);
 }
 
 function createDefaultConfig() {
@@ -118,22 +127,6 @@ function createDefaultConfig() {
     }
 
     process.env.CLI_HOME_PATH = cliConfig.cliHome;
-}
-
-// 检查用户入参
-function checkInputArgs() {
-    const minimist = require('minimist');
-    const args = minimist(process.argv.slice(2));
-    checkArgs(args);
-}
-
-function checkArgs(params) {
-    if (params.debug) {
-        process.env.LOG_LEVEL = 'verbose';
-    } else {
-        process.env.LOG_LEVEL = 'info';
-    }
-    log.level = process.env.LOG_LEVEL;
 }
 
 // 检查用户主目录
