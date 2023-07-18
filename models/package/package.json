@@ -25,5 +25,8 @@
   },
   "bugs": {
     "url": "https://github.com/chenhui996/egg-cli-2023/issues"
+  },
+  "dependencies": {
+    "@egg-cli-2023/utils": "file:../../utils/utils"
   }
 }
